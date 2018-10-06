@@ -1,6 +1,6 @@
 {
   "name": "ckeditor5-custom-highlighter",
-  "version": "0.0.1",
+  "version": "0.0.1-1",
   "description": "Custom highlight color selector for CKEditor 5",
   "keywords": [
     "ckeditor",
