@@ -6,11 +6,12 @@ import Colors from './colors.js';
 
 const TEXT_COLOR = 'highlightColor';
 
-Array.prototype.closestRGB = function (r,g,) {
+Array.prototype.closestRGB = function (str) {
         let min = 0xffffff;
         let best, current, i;
         for (i = 0; i < this.length; i++) {
-            current = dist(this[i].color.substr(1), str.substr(1));
+            let rgb = rgbFromColor(this[i].color);
+            current = dist(toHex(rgb[1], rgb[2], rgb[3]).substr(1), str.substr(1));
             if (current < min) {
                 min = current;
                 best = this[i];
@@ -57,19 +58,18 @@ export default class HighlightColorEditing extends Plugin {
                 model: {
                     key: TEXT_COLOR,
                     value: viewElement => {
-                        const color = viewElement.getStyle('color');
+                        const color = viewElement.getStyle('background-color');
 
                         if (!color) {
                             return null
                         }
 
                         // determine closest color
-                        const regEx = /^rgb\((\d*),\s+(\d*),\s+(\d*)\)$/;
-                        let rgb = regEx.exec(color);
+                        let rgb = rgbFromColor(color);
                         if (!rgb) {
                             return null;
                         }
-                        let best = options.closestRGB(rgb[1], rgb[2], rgb[3]);
+                        let best = options.closestRGB(toHex(rgb[1], rgb[2], rgb[3]));
 
                         if (!best) {
                             return null;
@@ -100,7 +100,7 @@ function _buildDefinition(options) {
         definition.view[option.color] = {
             name: 'mark',
             styles: {
-                'color': option.color
+                'background-color': option.color
             },
             priority: 5
         };
@@ -121,6 +121,11 @@ function toRGB(color) {
 
 function toHex(r, g, b) {
     return '#' + parseInt(r).toString(16) + parseInt(g).toString(16) + parseInt(b).toString(16);
+}
+
+function rgbFromColor(color) {
+    const regEx = /^rgb\((\d*),\s+(\d*),\s+(\d*)\)$/;
+    return regEx.exec(color);
 }
 
 function dist(s, t) {
