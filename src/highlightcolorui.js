@@ -36,7 +36,7 @@ export default class HighlightColorUI extends Plugin {
     _addColorButton(option) {
         const command = this.editor.commands.get('highlightColor');
 
-        this._addButton('highlightColor:' + option.model, option.title, option.model, decorateColorButton);
+        this._addButton('highlightColor:' + option.color, option.title, option.color, decorateColorButton);
 
         function decorateColorButton(button) {
             button.bind('isEnabled').to(command, 'isEnabled');
