@@ -128,7 +128,7 @@ export default class HighlightColorUI extends Plugin {
 
             dropdownView.extendTemplate( {
                 attributes: {
-                    class: [ 'color-picker' ]
+                    class: [ 'highlight-color-picker' ]
                 }
             } );
 

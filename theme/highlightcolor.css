@@ -1,10 +1,10 @@
-.color-picker .ck-toolbar {
+.highlight-color-picker .ck-toolbar {
     width: 308px !important;
     padding-bottom: 5px;
     flex-wrap: wrap !important;
 }
 
-.color-picker .ck-toolbar .ck-button {
+.highlight-color-picker .ck-toolbar .ck-button {
     padding: 1px !important;
     margin: 0 !important;
     min-height: 0 !important;
