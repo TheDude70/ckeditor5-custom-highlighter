@@ -44,10 +44,6 @@ const colors = [
         color: 'rgb(255,255,0)',
     },
     {
-        title: 'rgb(204,204,204)',
-        color: 'rgb(204,204,204)',
-    },
-    {
         title: 'Green',
         color: 'rgb(0,255,0)',
     },

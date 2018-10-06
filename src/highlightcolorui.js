@@ -40,7 +40,7 @@ export default class HighlightColorUI extends Plugin {
 
         function decorateColorButton(button) {
             button.bind('isEnabled').to(command, 'isEnabled');
-            button.bind('isOn').to(command, 'value', value => value === option.model);
+            button.bind('isOn').to(command, 'value', value => value === option.color);
             button.iconView.fillColor = option.color;
         }
     }
