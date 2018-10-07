@@ -7,6 +7,7 @@ import { createDropdown, addToolbarToDropdown} from '@ckeditor/ckeditor5-ui/src/
 
 import highlightColorIcon from '../theme/icons/marker.svg';
 import ColorIcon from '../theme/icons/color.svg';
+import eraserIcon from '../theme/icons/eraser.svg';
 import '../theme/highlightcolor.css';
 
 
@@ -45,8 +46,7 @@ export default class HighlightColorUI extends Plugin {
         }
     }
 
-    _addButton(name, label, value, decorateButton = () => {
-    }) {
+    _addButton(name, label, value, decorateButton = () => {}) {
         const editor = this.editor;
 
         editor.ui.componentFactory.add(name, locale => {
@@ -56,7 +56,7 @@ export default class HighlightColorUI extends Plugin {
 
             buttonView.set({
                 label: localized,
-                icon: ColorIcon,
+                icon: (label !== 'White' ? ColorIcon : eraserIcon),
                 tooltip: true
             });
 
@@ -80,7 +80,7 @@ export default class HighlightColorUI extends Plugin {
         const startingColor = options[0];
 
         const optionsMap = options.reduce((retVal, option) => {
-            retVal[option.model] = option;
+            retVal[option.color] = option;
 
             return retVal;
         }, {});
@@ -99,15 +99,15 @@ export default class HighlightColorUI extends Plugin {
             splitButtonView.set({
                 tooltip: t('Highlight Color'),
                 // Holds last executed highlight color.
-                lastExecuted: startingColor.model,
+                lastExecuted: startingColor.color,
                 // Holds current highlight color to execute (might be different then last used).
-                commandValue: startingColor.model
+                commandValue: startingColor.color
             });
 
             // Dropdown button changes to selection (command.value):
             // - If selection is in color it gets active color appearance (color) and is activated.
             splitButtonView.bind('color').to(command, 'value', value => getActiveOption(value, 'color'));
-            splitButtonView.bind('commandValue').to(command, 'value', value => getActiveOption(value, 'model'));
+            splitButtonView.bind('commandValue').to(command, 'value', value => getActiveOption(value, 'color'));
             splitButtonView.bind('isOn').to(command, 'value', value => !!value);
 
             splitButtonView.delegate('execute').to(dropdownView);
@@ -115,10 +115,10 @@ export default class HighlightColorUI extends Plugin {
             // Create buttons array.
             const buttons = options.map(option => {
                 // Get existing color button.
-                const buttonView = componentFactory.create('highlightColor:' + option.model);
+                const buttonView = componentFactory.create('highlightColor:' + option.color);
 
                 // Update lastExecutedColor on execute.
-                this.listenTo(buttonView, 'execute', () => dropdownView.buttonView.set({lastExecuted: option.model}));
+                this.listenTo(buttonView, 'execute', () => dropdownView.buttonView.set({lastExecuted: option.color}));
 
                 return buttonView;
             });

@@ -49,7 +49,7 @@ export default class HighlightColorCommand extends Command {
                     const highlightColorRange = new Range( highlightColorStart, highlightColorEnd );
 
                     // Then depending on current value...
-                    if ( !color || this.value === color ) {
+                    if ( !color || this.value === color || color === 'rgb(255,255,255)') {
                         // ...remove attribute when passing text color different than current or executing "eraser".
                         writer.removeAttribute( 'highlightColor', highlightColorRange );
                         writer.removeSelectionAttribute( 'highlightColor' );
@@ -58,12 +58,12 @@ export default class HighlightColorCommand extends Command {
                         writer.setAttribute( 'highlightColor', color, highlightColorRange );
                         writer.setSelectionAttribute( 'highlightColor', color );
                     }
-                } else if ( color ) {
+                } else if ( color && color !== 'rgb(255,255,255)') {
                     writer.setSelectionAttribute( 'highlightColor', color );
                 }
             } else {
                 for ( const range of ranges ) {
-                    if ( color ) {
+                    if ( color && color !== 'rgb(255,255,255)') {
                         writer.setAttribute( 'highlightColor', color, range );
                     } else {
                         writer.removeAttribute( 'highlightColor', range );

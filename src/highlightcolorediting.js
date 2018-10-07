@@ -7,17 +7,17 @@ import Colors from './colors.js';
 const TEXT_COLOR = 'highlightColor';
 
 Array.prototype.closestRGB = function (str) {
-        let min = 0xffffff;
-        let best, current, i;
-        for (i = 0; i < this.length; i++) {
-            let rgb = rgbFromColor(this[i].color);
-            current = dist(toHex(rgb[1], rgb[2], rgb[3]).substr(1), str.substr(1));
-            if (current < min) {
-                min = current;
-                best = this[i];
-            }
+    let min = 0xffffff;
+    let best, current, i;
+    for (i = 0; i < this.length; i++) {
+        let rgb = rgbFromColor(this[i].color);
+        current = dist(toHex(rgb[1], rgb[2], rgb[3]).substr(1), str.substr(1));
+        if (current < min) {
+            min = current;
+            best = this[i];
         }
-        return best;
+    }
+    return best;
 };
 
 export default class HighlightColorEditing extends Plugin {
@@ -50,10 +50,7 @@ export default class HighlightColorEditing extends Plugin {
         editor.conversion.for('upcast')
             .add(upcastElementToAttribute({
                 view: {
-                    name: 'mark',
-                    attributes: {
-                        title: 'color'
-                    }
+                    name: 'mark'
                 },
                 model: {
                     key: TEXT_COLOR,
@@ -124,7 +121,7 @@ function toHex(r, g, b) {
 }
 
 function rgbFromColor(color) {
-    const regEx = /^rgb\((\d*),\s+(\d*),\s+(\d*)\)$/;
+    const regEx = /^rgb\((\d*),\s?(\d*),\s?(\d*)\)$/;
     return regEx.exec(color);
 }
 
