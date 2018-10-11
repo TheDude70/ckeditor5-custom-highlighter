@@ -1,6 +1,6 @@
 {
   "name": "ckeditor5-custom-highlighter",
-  "version": "0.0.2",
+  "version": "0.0.2-1",
   "description": "Custom highlight color selector for CKEditor 5",
   "keywords": [
     "ckeditor",
@@ -25,7 +25,7 @@
   "bugs": "https://github.com/TheDude70/ckeditor5-custom-highlighter/issues",
   "repository": {
     "type": "git",
-    "url": "https://github.com/ckeditor/ckeditor5-essentials.git"
+    "url": "https://github.com/TheDude70/ckeditor5-custom-highlighter"
   },
   "files": [
     "lang",
