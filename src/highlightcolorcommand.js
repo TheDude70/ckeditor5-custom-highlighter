@@ -28,7 +28,7 @@ export default class HighlightColorCommand extends Command {
         const document = model.document;
         const selection = document.selection;
 
-        const color = options.value;
+        const color = (options.value === 'rgba(0,0,0,0)' ? null : options.value);
 
         model.change( writer => {
             const ranges = model.schema.getValidRanges( selection.getRanges(), 'highlightColor' );

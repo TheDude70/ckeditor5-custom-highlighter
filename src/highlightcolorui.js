@@ -145,12 +145,12 @@ export default class HighlightColorUI extends Plugin {
             // If current is not set or it is the same as last execute this method will return the option key (like icon or color)
             // of last executed color. Otherwise it will return option key for current one.
             function getActiveOption(current, key) {
+                const whichColor = current === splitButtonView.lastExecuted ? splitButtonView.lastExecuted : current;
+
                 if (!current) {
                     // if black (no styling) return empty color so our main button does not get styled
                     return 'rgba(0,0,0,0)';
                 }
-
-                const whichColor = current === splitButtonView.lastExecuted ? splitButtonView.lastExecuted : current;
 
                 return optionsMap[whichColor][key];
             }
