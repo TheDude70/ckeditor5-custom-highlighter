@@ -117,7 +117,7 @@ function toRGB(color) {
 }
 
 function toHex(r, g, b) {
-    return '#' + parseInt(r).toString(16) + parseInt(g).toString(16) + parseInt(b).toString(16);
+    return '#' + parseInt(r).toString(16).padStart(2, '0') + parseInt(g).toString(16).padStart(2, '0') + parseInt(b).toString(16).padStart(2, '0');
 }
 
 function rgbFromColor(color) {
